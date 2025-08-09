@@ -1,0 +1,272 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  background-color: #0f172a;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-player {
+  position: relative;
+  min-width: 400px;
+  max-width: 50%;
+  border-radius: 20px;
+  background: conic-gradient(
+    from 0deg,
+    #3b82f6 0deg,
+    #60a5fa 90deg,
+    #9333ea 180deg,
+    #7e22ce 270deg,
+    #3b82f6 360deg
+  );
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  z-index: 2;
+}
+.music-player::before {
+  --angle: 0deg;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    from var(--angle),
+    #3b82f6 0deg,
+    #60a5fa 90deg,
+    #9333ea 180deg,
+    #7e22ce 270deg,
+    #3b82f6 360deg
+  );
+  filter: blur(1.5rem);
+  border-radius: 20px;
+  z-index: -3;
+}
+.image-box {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  padding: 10px;
+  z-index: 2;
+}
+.image-box .img-cover {
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 15px;
+}
+
+.image-box::before {
+  --angle: 20deg;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position: absolute;
+  inset: 0px;
+
+  background: repeating-conic-gradient(
+    from var(--angle),
+    #fff 0%,
+    #fff 15%,
+    transparent 15%,
+    transparent 40%,
+    #fff 50%
+  );
+  border-radius: 15px;
+}
+
+body.active .image-box::before,
+body.active .music-player::before {
+  animation: spin 3.5s linear infinite;
+}
+
+.music-info-wrapper {
+  text-align: center;
+  margin-top: 10px;
+  color: #fff;
+  font-weight: bold;
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3);
+}
+
+/* CONTROL */
+.controls {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* CONTROL  BUTTONS*/
+.control-buttons {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* SHUFFLE BUTTONS */
+.shuffle-buttons {
+  padding: 10px;
+}
+.shuffle-buttons svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+  cursor: pointer;
+}
+.shuffle-buttons svg:nth-child(2) {
+  display: none;
+}
+.shuffle-buttons.active svg:nth-child(1) {
+  display: none;
+}
+.shuffle-buttons.active svg:nth-child(2) {
+  display: block;
+}
+
+/* CHANGE  BUTTONS*/
+.change-buttons {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.change-buttons .control-btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.change-buttons .control-btn svg,
+.change-buttons .control-btn path,
+.volume-slider-wrapper svg {
+  width: 20px;
+  height: 20px;
+}
+.rot {
+  transform: rotate(180deg);
+}
+
+#play-pause-btn svg:nth-child(2){
+  display: none;
+}
+#play-pause-btn.active svg:nth-child(1) {
+  display: none;
+}
+#play-pause-btn.active svg:nth-child(2) {
+  display: inline-block;
+}
+/* CONTROL SLIDERS */
+
+/* TIME (CURRENT & TOTAL) */
+.control-sliders .time-wrapper {
+  width: 100%;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* CONTROL SLIDERS */
+.control-sliders .seek-slider,
+.control-sliders .volume-slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s;
+  display: block;
+  border-radius: 10px;
+}
+
+.control-sliders .seek-slider {
+  cursor: pointer;
+  width: 100%;
+}
+
+/* VOLUME BUTTONS */
+.control-buttons .volume {
+  position: relative;
+  padding: 10px;
+}
+.volume-btn {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+.volume-slider-wrapper .volume-slider {
+  width: 60px;
+  margin: 0 1rem;
+}
+.control-buttons .volume .volume-slider-wrapper {
+  background-color: #0f172a;
+  border-radius: 10px;
+  padding: 10px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0%;
+  left: -150%;
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.control-buttons .volume:hover .volume-slider-wrapper {
+  transform: translateY(-90%);
+  pointer-events: all;
+  opacity: 1;
+}
+
+/* Modify the appearance of the slider thumb */
+.seek-slider::-webkit-slider-thumb,
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+/* effect in hover to sliders */
+.seek-slider:hover,
+.volume-slider:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
