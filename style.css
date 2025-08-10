@@ -7,6 +7,7 @@
   font-family: "Open Sans", sans-serif;
 }
 body {
+  overflow: hidden;
   background-color: #0f172a;
   height: 100vh;
   display: flex;
@@ -16,8 +17,7 @@ body {
 
 .music-player {
   position: relative;
-  min-width: 400px;
-  max-width: 50%;
+  width: 400px;
   border-radius: 20px;
   background: conic-gradient(
     from 0deg,
@@ -33,6 +33,7 @@ body {
   align-items: center;
   padding: 20px;
   z-index: 2;
+  /* overflow: hidden; */
 }
 .music-player::before {
   --angle: 0deg;
@@ -70,7 +71,7 @@ body {
 }
 
 .image-box::before {
-  --angle: 20deg;
+  --angle: 0deg;
   content: "";
   top: 0;
   left: 0;
@@ -93,7 +94,7 @@ body {
 
 body.active .image-box::before,
 body.active .music-player::before {
-  animation: spin 3.5s linear infinite;
+  animation: spin 4s linear infinite;
 }
 
 .music-info-wrapper {
@@ -120,21 +121,41 @@ body.active .music-player::before {
 
 /* SHUFFLE BUTTONS */
 .shuffle-buttons {
+  position: relative;
   padding: 10px;
 }
+.shuffle-text {
+  width: max-content;
+  position: absolute;
+  top: -50%;
+  left: 0;
+  background: #0f172a;
+  border-radius: 10px;
+  padding: 5px;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.2s;
+}
+.shuffle-buttons:hover .shuffle-text {
+  opacity: 1;
+  top: -40%;
+}
+
 .shuffle-buttons svg {
   width: 20px;
   height: 20px;
   fill: #fff;
   cursor: pointer;
 }
-.shuffle-buttons svg:nth-child(2) {
-  display: none;
-}
-.shuffle-buttons.active svg:nth-child(1) {
+.shuffle-buttons svg:nth-child(1) {
   display: none;
 }
 .shuffle-buttons.active svg:nth-child(2) {
+  display: none;
+}
+.shuffle-buttons.active svg:nth-child(1) {
   display: block;
 }
 
@@ -161,7 +182,7 @@ body.active .music-player::before {
   transform: rotate(180deg);
 }
 
-#play-pause-btn svg:nth-child(2){
+#play-pause-btn svg:nth-child(2) {
   display: none;
 }
 #play-pause-btn.active svg:nth-child(1) {
@@ -212,6 +233,7 @@ body.active .music-player::before {
   height: 20px;
 }
 .volume-slider-wrapper .volume-slider {
+  cursor: pointer;
   width: 60px;
   margin: 0 1rem;
 }
@@ -226,13 +248,13 @@ body.active .music-player::before {
   top: 0%;
   left: -150%;
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translate(-20%, -100%);
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .control-buttons .volume:hover .volume-slider-wrapper {
-  transform: translateY(-90%);
+  transform: translate(-20%, -90%);
   pointer-events: all;
   opacity: 1;
 }

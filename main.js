@@ -56,10 +56,13 @@ const currentTimeEl = document.querySelector(".current-time");
 const volumeSlider = document.querySelector(".volume-slider");
 const seekSlider = document.querySelector(".seek-slider");
 const shuffleBtn = document.querySelector(".shuffle-buttons");
+const shuffleBtnText = document.querySelector(".shuffle-text");
 
 let index = 0;
+let isPlaying = false;
+let random = false;
 
-function showData(el) {
+function loadMusic(el) {
   const { musicName, singerName, url, poster } = el;
   musicNameEl.textContent = musicName;
   singerNameEl.textContent = singerName;
@@ -69,30 +72,71 @@ function showData(el) {
 }
 
 function playPauseAudio() {
-  if (audio.paused) {
-    document.body.classList.add("active");
-    playPauseBtn.classList.add("active");
-    audio.play();
-  } else {
+  if (isPlaying) {
     document.body.classList.remove("active");
     playPauseBtn.classList.remove("active");
     audio.pause();
+  } else {
+    document.body.classList.add("active");
+    playPauseBtn.classList.add("active");
+    audio.play();
   }
+  isPlaying = !isPlaying;
 }
 
 function nextAudio() {
-  index++;
-  if (index > musics.length - 1) index = 0;
-  showData(musics[index]);
-  setTimeout(playPauseAudio, 500);
+  if (random) randomIndex();
+  else {
+    index++;
+    if (index > musics.length - 1) index = 0;
+  }
+  const wasPlaying = isPlaying;
+  loadMusic(musics[index]);
+  if (wasPlaying) playPauseAudio();
 }
 
 function prevAudio() {
-  index--;
-  if (index < 0) index = musics.length - 1;
-  showData(musics[index]);
-  setTimeout(playPauseAudio, 500);
+  if (random) randomIndex();
+  else {
+    index--;
+    if (index < 0) index = musics.length - 1;
+  }
+
+  const wasPlaying = isPlaying;
+  loadMusic(musics[index]);
+  if (wasPlaying) playPauseAudio();
 }
+
+function randomIndex() {
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * musics.length);
+  } while (newIndex === index);
+  index = newIndex;
+  return index;
+}
+
+function formatTime(timeInSeconds) {
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+}
+
+function randomMusic() {
+  random = !random;
+  shuffleBtn.classList.toggle("active");
+  shuffleBtn.classList.contains("active")
+    ? (shuffleBtnText.textContent = "shuffle-On")
+    : (shuffleBtnText.textContent = "shuffle-Off");
+}
+
+// RESET MUSIC INFORMATION WHEN AUDIO ENDS
+
+playPauseBtn.addEventListener("click", playPauseAudio);
+nextBtn.addEventListener("click", nextAudio);
+prevBtn.addEventListener("click", prevAudio);
+shuffleBtn.addEventListener("click", randomMusic);
 
 // HANDLE MUSIC SOUNDS
 volumeSlider.addEventListener("input", () => {
@@ -103,45 +147,26 @@ volumeSlider.addEventListener("input", () => {
 seekSlider.addEventListener("input", () => {
   const newTime = audio.duration * (seekSlider.value / 100);
   audio.currentTime = newTime;
-  console.log(newTime);
 });
 
 audio.addEventListener("timeupdate", () => {
-  const currentTime = audio.currentTime;
-  const totalTime = audio.duration;
-
-  const percentage = (currentTime / totalTime) * 100;
+  const percentage = (audio.currentTime / audio.duration) * 100 || 0;
 
   if (percentage) {
     seekSlider.value = percentage;
   }
 
-  if ((currentTime, totalTime)) {
-    currentTimeEl.textContent = formatTime(currentTime);
-    totalTimeEl.textContent = formatTime(totalTime);
-  }
+  currentTimeEl.textContent = formatTime(audio.currentTime);
 });
 
-const formatTime = (timeInSeconds) => {
-  const minutes = Math.floor(timeInSeconds / 60);
-  const seconds = Math.floor(timeInSeconds % 60);
-
-  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-};
-
-// RESET MUSIC INFORMATION WHEN AUDIO ENDS
-audio.addEventListener("ended", () => {
-  audio.pause();
-  document.body.classList.remove("active");
-  playPauseBtn.classList.remove("active");
-});
-
-playPauseBtn.addEventListener("click", playPauseAudio);
-nextBtn.addEventListener("click", nextAudio);
-prevBtn.addEventListener("click", prevAudio);
-// shuffleBtn.addEventListener("click", random);
-
+// show total music time
 audio.addEventListener("loadedmetadata", () => {
   totalTimeEl.textContent = formatTime(audio.duration);
 });
-showData(musics[index]);
+
+// RESET MUSIC INFORMATION WHEN AUDIO ENDS
+audio.addEventListener("ended", () => {
+  if (isPlaying) nextAudio();
+});
+
+loadMusic(musics[index]);
