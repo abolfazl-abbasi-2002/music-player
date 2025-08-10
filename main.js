@@ -56,32 +56,73 @@ const currentTimeEl = document.querySelector(".current-time");
 const volumeSlider = document.querySelector(".volume-slider");
 const seekSlider = document.querySelector(".seek-slider");
 const shuffleBtn = document.querySelector(".shuffle-buttons");
+const repeatBtn = document.querySelector(".repeat");
 const shuffleBtnText = document.querySelector(".shuffle-text");
+const playlistEl = document.querySelector(".playlist-items");
+const playlistBtn = document.querySelectorAll(".playlist-btn");
+const menuShuffleBtn = document.querySelector(".menu-shuffle-btn");
+const menuPlayBtn = document.querySelector(".menu-play-btn");
 
 let index = 0;
 let isPlaying = false;
 let random = false;
+let isRepeat = false;
+// creat playlist
+function showPlaylist(music) {
+  music.forEach((el) => {
+    const { musicName, singerName, url, poster } = el;
+    const item = `<div class="music-item">
+    <img class="music-poster" src="${poster}" alt="${musicName}" />
+    <div class="music-info">
+    <p class="music-song-name">${musicName}</p>
+    <p class="music-singer-name">${singerName}</p>
+    </div>
+    </div>`;
+    playlistEl.innerHTML += item;
+  });
+}
+showPlaylist(musics);
 
-function loadMusic(el) {
+// load playlist musics
+const musicItems = document.querySelectorAll(".music-item");
+musicItems.forEach((item, i) => {
+  item.addEventListener("click", () => {
+    musicItems.forEach((item) => item.classList.remove("active"));
+    loadMusic(musics[i], i);
+    showMenu();
+    playPauseAudio();
+  });
+});
+
+function showMenu() {
+  playlistEl.parentNode.classList.toggle("active");
+}
+
+function loadMusic(el, i = 0) {
   const { musicName, singerName, url, poster } = el;
   musicNameEl.textContent = musicName;
   singerNameEl.textContent = singerName;
   imageCoverEl.setAttribute("src", poster);
   imageCoverEl.setAttribute("alt", musicName);
   audio.setAttribute("src", url);
+  musicItems[i].classList.add("active");
+}
+
+function changePlayMode() {
+  isPlaying = !isPlaying;
+  playPauseAudio();
 }
 
 function playPauseAudio() {
   if (isPlaying) {
-    document.body.classList.remove("active");
-    playPauseBtn.classList.remove("active");
-    audio.pause();
-  } else {
     document.body.classList.add("active");
     playPauseBtn.classList.add("active");
     audio.play();
+  } else {
+    document.body.classList.remove("active");
+    playPauseBtn.classList.remove("active");
+    audio.pause();
   }
-  isPlaying = !isPlaying;
 }
 
 function nextAudio() {
@@ -90,9 +131,10 @@ function nextAudio() {
     index++;
     if (index > musics.length - 1) index = 0;
   }
-  const wasPlaying = isPlaying;
   loadMusic(musics[index]);
-  if (wasPlaying) playPauseAudio();
+  playPauseAudio();
+  musicItems.forEach((item) => item.classList.remove("active"));
+  musicItems[index].classList.add("active");
 }
 
 function prevAudio() {
@@ -102,9 +144,10 @@ function prevAudio() {
     if (index < 0) index = musics.length - 1;
   }
 
-  const wasPlaying = isPlaying;
   loadMusic(musics[index]);
-  if (wasPlaying) playPauseAudio();
+  playPauseAudio();
+  musicItems.forEach((item) => item.classList.remove("active"));
+  musicItems[index].classList.add("active");
 }
 
 function randomIndex() {
@@ -132,8 +175,12 @@ function randomMusic() {
 }
 
 // RESET MUSIC INFORMATION WHEN AUDIO ENDS
-
-playPauseBtn.addEventListener("click", playPauseAudio);
+playlistBtn.forEach((btn) => {
+  btn.addEventListener("click", showMenu);
+});
+menuPlayBtn.addEventListener("click", changePlayMode);
+menuShuffleBtn.addEventListener("click", randomMusic);
+playPauseBtn.addEventListener("click", changePlayMode);
 nextBtn.addEventListener("click", nextAudio);
 prevBtn.addEventListener("click", prevAudio);
 shuffleBtn.addEventListener("click", randomMusic);
@@ -164,9 +211,20 @@ audio.addEventListener("loadedmetadata", () => {
   totalTimeEl.textContent = formatTime(audio.duration);
 });
 
+repeatBtn.addEventListener("click", () => {
+  repeatBtn.classList.toggle("active");
+  isRepeat = !isRepeat;
+});
+
 // RESET MUSIC INFORMATION WHEN AUDIO ENDS
 audio.addEventListener("ended", () => {
-  if (isPlaying) nextAudio();
+  if (isRepeat) {
+    setTimeout(() => {
+      playPauseAudio();
+    }, 800);
+  } else {
+    if (isPlaying) nextAudio();
+  }
 });
 
 loadMusic(musics[index]);

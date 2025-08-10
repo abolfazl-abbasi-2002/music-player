@@ -47,6 +47,33 @@
 
           <!-- CONTROL BUTTONS -->
           <div class="control-buttons">
+            <!-- PLAYLIST BUTTON -->
+            <button class="playlist-btn control-btn">
+              <svg
+                version="1.1"
+                id="Icons"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 32 32"
+                style="enable-background: new 0 0 32 32"
+                xml:space="preserve"
+              >
+                <g>
+                  <path
+                    d="M16,10c1.7,0,3-1.3,3-3s-1.3-3-3-3s-3,1.3-3,3S14.3,10,16,10z"
+                  ></path>
+                  <path
+                    d="M16,13c-1.7,0-3,1.3-3,3s1.3,3,3,3s3-1.3,3-3S17.7,13,16,13z"
+                  ></path>
+                  <path
+                    d="M16,22c-1.7,0-3,1.3-3,3s1.3,3,3,3s3-1.3,3-3S17.7,22,16,22z"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+
             <!-- SHUFFLE BUTTONS -->
             <div class="shuffle-buttons">
               <!-- shuffle on -->
@@ -240,6 +267,7 @@
                 </svg>
               </button>
             </div>
+
             <!-- VOLUME  BUTTONS-->
             <div class="volume">
               <svg
@@ -380,10 +408,225 @@
                 </svg>
               </div>
             </div>
+
+            <!-- repeat BUTTONS-->
+            <div class="repeat">
+              <!-- repeat off -->
+              <svg
+                viewBox="0 0 18 20"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g
+                  id="Icons"
+                  stroke="none"
+                  stroke-width="0"
+                  fill="none"
+                  fill-rule="evenodd"
+                >
+                  <g
+                    id="Two-Tone"
+                    transform="translate(-885.000000, -952.000000)"
+                  >
+                    <g id="AV" transform="translate(100.000000, 852.000000)">
+                      <g
+                        id="Two-Tone-/-AV-/-repeat"
+                        transform="translate(782.000000, 98.000000)"
+                      >
+                        <g>
+                          <polygon
+                            id="Path"
+                            points="0 0 24 0 24 24 0 24"
+                          ></polygon>
+                          <path
+                            d="M7,22 L7,19 L19,19 L19,13 L17,13 L17,17 L7,17 L7,14 L3,18 L7,22 Z M21,6 L17,2 L17,5 L5,5 L5,11 L7,11 L7,7 L17,7 L17,10 L21,6 Z"
+                            id="🔹-Primary-Color"
+                            fill="#fff"
+                          ></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <!-- repeat on -->
+              <svg
+                viewBox="0 0 18 20"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g
+                  id="Icons"
+                  stroke="none"
+                  stroke-width="0"
+                  fill="none"
+                  fill-rule="evenodd"
+                >
+                  <g
+                    id="Rounded"
+                    transform="translate(-341.000000, -996.000000)"
+                  >
+                    <g id="AV" transform="translate(100.000000, 852.000000)">
+                      <g
+                        id="-Round-/-AV-/-repeat_one"
+                        transform="translate(238.000000, 142.000000)"
+                      >
+                        <g>
+                          <rect id="Rectangle-Copy-58" x="0" y="0"></rect>
+                          <path
+                            d="M7,7 L17,7 L17,8.79 C17,9.24 17.54,9.46 17.85,9.14 L20.64,6.35 C20.84,6.15 20.84,5.84 20.64,5.64 L17.85,2.85 C17.54,2.54 17,2.76 17,3.21 L17,5 L6,5 C5.45,5 5,5.45 5,6 L5,10 C5,10.55 5.45,11 6,11 C6.55,11 7,10.55 7,10 L7,7 Z M17,17 L7,17 L7,15.21 C7,14.76 6.46,14.54 6.15,14.86 L3.36,17.65 C3.16,17.85 3.16,18.16 3.36,18.36 L6.15,21.15 C6.46,21.46 7,21.24 7,20.79 L7,19 L18,19 C18.55,19 19,18.55 19,18 L19,14 C19,13.45 18.55,13 18,13 C17.45,13 17,13.45 17,14 L17,17 Z M13,14.25 L13,9.81 C13,9.36 12.64,9 12.19,9 C12.06,9 11.94,9.03 11.83,9.09 L10.34,9.83 C10.13,9.93 10,10.15 10,10.38 C10,10.72 10.28,11 10.62,11 L11.5,11 L11.5,14.25 C11.5,14.66 11.84,15 12.25,15 C12.66,15 13,14.66 13,14.25 Z"
+                            id="🔹Icon-Color"
+                            fill="#fff"
+                          ></path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              <div class="repeat-text">repeat</div>
+            </div>
           </div>
         </div>
       </div>
+      <!-- music lists -->
+      <div class="playlist">
+        <div class="playlist-menu">
+          <button class="menu-sort-btn control-btn">
+            <svg
+              viewBox="0 0 21 20"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g
+                id="Icons"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+              >
+                <g
+                  id="Two-Tone"
+                  transform="translate(-237.000000, -996.000000)"
+                >
+                  <g id="AV" transform="translate(100.000000, 852.000000)">
+                    <g
+                      id="Two-Tone-/-AV-/-sort_by_alpha"
+                      transform="translate(136.000000, 142.000000)"
+                    >
+                      <g>
+                        <polygon
+                          id="Path"
+                          points="0 0 24 0 24 24 0 24"
+                        ></polygon>
+                        <path
+                          d="M14.94,4.66 L12.58,2.3 L10.22,4.66 L14.94,4.66 Z M10.39,17.73 L12.23,17.73 L7.74,6.27 L6.1,6.27 L1.6,17.73 L3.44,17.73 L4.36,15.28 L9.47,15.28 L10.39,17.73 Z M4.97,13.64 L6.91,8.46 L8.85,13.64 L4.97,13.64 Z M12.58,21.7 L14.91,19.37 L10.25,19.37 L12.58,21.7 Z M21.66,7.54 L21.66,6.28 L13.36,6.28 L13.36,7.88 L19.24,7.88 L13.32,16.44 L13.32,17.73 L21.85,17.73 L21.85,16.14 L15.73,16.14 L21.66,7.54 Z"
+                          id="🔹-Primary-Color"
+                          fill="#fff"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+            Sort
+          </button>
+          <!-- play -->
+          <button class="menu-play-btn control-btn">
+            <svg
+              width="11px"
+              height="14px"
+              viewBox="0 0 11 14"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g id="Icons" stroke="none" fill="none">
+                <g id="Rounded" transform="translate(-753.000000, -955.000000)">
+                  <g id="AV" transform="translate(100.000000, 852.000000)">
+                    <g
+                      id="-Round-/-AV-/-play_arrow"
+                      transform="translate(646.000000, 98.000000)"
+                    >
+                      <g>
+                        <rect
+                          id="Rectangle-Copy-50"
+                          x="0"
+                          y="0"
+                          width="24"
+                          height="24"
+                        ></rect>
+                        <path
+                          d="M7,6.82 L7,17.18 C7,17.97 7.87,18.45 8.54,18.02 L16.68,12.84 C17.3,12.45 17.3,11.55 16.68,11.15 L8.54,5.98 C7.87,5.55 7,6.03 7,6.82 Z"
+                          id="🔹Icon-Color"
+                          fill="#fff"
+                        ></path>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <!-- Shuffle -->
+          <button class="menu-shuffle-btn control-btn">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 92 92"
+              enable-background="new 0 0 92 92"
+              xml:space="preserve"
+            >
+              <path
+                id="XMLID_799_"
+                d="M68.2,30C64,30,53.5,40.4,45.8,47.9C34.2,59.1,23.2,70,14.4,70H9c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4h5.4
+	c5.6,0,16.8-11.2,25.8-19.9C51.2,31.5,60.7,22,68.2,22h5.2l-5.5-5.3c-1.6-1.6-1.6-3.9,0-5.5c1.6-1.6,4.1-1.6,5.7,0l12.3,12.3
+	c0.8,0.8,1.2,1.8,1.2,2.8c0,1.1-0.4,2.1-1.2,2.8L73.5,41.4c-0.8,0.8-1.8,1.1-2.8,1.1c-1,0-2-0.4-2.8-1.2c-1.6-1.6-1.6-4.2,0-5.7
+	l5.5-5.6H68.2z M73.5,50.6c-1.6-1.6-4.1-1.6-5.7,0c-1.6,1.6-1.6,4.2,0,5.8l5.5,5.6h-5.2c-3.3,0-8.8-4.9-14.2-9.9
+	c-1.6-1.5-4.1-1.5-5.7,0.1c-1.5,1.6-1.4,4.3,0.2,5.8C56.8,65.7,62.4,70,68.2,70h5.2l-5.5,5.3c-1.6,1.6-1.6,4,0,5.6
+	c0.8,0.8,1.8,1.1,2.8,1.1c1,0,2-0.4,2.8-1.2l12.3-12.3c0.8-0.8,1.2-1.8,1.2-2.8c0-1.1-0.4-2.1-1.2-2.8L73.5,50.6z M9,30h5.4
+	c4.2,0,10.5,5.4,15.5,9.9c0.8,0.7,1.7,1.1,2.7,1.1c1.1,0,2.2-0.4,3-1.3c1.5-1.6,1.4-4.3-0.3-5.8c-7.8-7.1-14.4-12-20.9-12H9
+	c-2.2,0-4,1.8-4,4S6.8,30,9,30z"
+              ></path>
+            </svg>
+          </button>
+          <!-- PLAYLIST BUTTON -->
+          <button class="playlist-btn control-btn">
+            <svg
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 54.888 54.888"
+              style="enable-background: new 0 0 54.888 54.888"
+              xml:space="preserve"
+            >
+              <path
+                style="fill: #fff"
+                d="M52.104,0.249c-0.216-0.189-0.501-0.275-0.789-0.241l-31,4.011c-0.499,0.065-0.872,0.489-0.872,0.992
+	v6.017v4.212v26.035C17.706,39.285,14.997,38,11.944,38c-5.247,0-9.5,3.781-9.5,8.444s4.253,8.444,9.5,8.444s9.5-3.781,9.5-8.444
+	c0-0.332-0.027-0.658-0.069-0.981c0.04-0.108,0.069-0.221,0.069-0.343V16.118l29-3.753v18.909C48.706,29.285,45.997,28,42.944,28
+	c-5.247,0-9.5,3.781-9.5,8.444s4.253,8.444,9.5,8.444s9.5-3.781,9.5-8.444c0-0.092-0.012-0.181-0.015-0.272
+	c0.002-0.027,0.015-0.05,0.015-0.077V11.227V7.016V1C52.444,0.712,52.32,0.438,52.104,0.249z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <!-- items -->
+        <div class="playlist-items"></div>
+      </div>
     </div>
+
     <script src="main.js"></script>
   </body>
 </html>
